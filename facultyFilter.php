@@ -2,13 +2,7 @@
 	require_once("includes/initialize.php");
 	include 'header.php';
 
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} else {
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 
 <script>setActive("entry");</script>
@@ -37,33 +31,24 @@ if (isset($_POST['search'])){
 					  </div>
 					  <div class="panel-body">
 				          <div class="form-group" id="instuctorId">
-				            <div class="col-md-10">
+				            <div class="col-md-12">
 				             <label class="col-md-4 control-label" for="Name">Name:</label>
-
 				                <div class="col-md-8">
 				                  <input class="form-control input-sm" id="FullName" name="FullName" type="text" placeholder="Name">
 				                </div>
-
 				            </div>
-
 				          </div>
-				           
-						<div class="form-group" id="instuctorId">
-				            <div class="col-md-10">
-				               <label class="col-md-4 control-label"></label>
 
-				                <div class="col-md-8">
-							         <div class="btn-group">
-									    <button type="submit" name="search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> View</button>
-									    <button type="Reset" name="search" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-									    <a href="newfaculty.php" name="add" class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span> Add</a>
-									  
-									  
+						<div class="form-group">
+				            <div class="col-md-12">
+				                <div class="col-md-8 col-md-offset-4">
+							         <div class="filter-query-actions">
+									    <button type="submit" name="search" class="btn btn-primary"><i class="fas fa-search"></i> View</button>
+									    <button type="reset" class="btn btn-outline-secondary"><i class="fas fa-undo"></i> Reset</button>
+									    <a href="newfaculty.php" name="add" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add</a>
 									</div>
 				                </div>
-
 				            </div>
-
 				          </div>
 				          
 

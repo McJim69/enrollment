@@ -2,15 +2,7 @@
 	require_once("includes/initialize.php");
 	include 'header.php';
 
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} 	
-	else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} 
-	else{
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 
 <script>setActive("entry");</script>
@@ -96,87 +88,38 @@
 				  	?>
 				  </tbody>
 				  <tfoot>
-				  	<tr><td colspan="7"><?php	echo '<ul class="pager" align="center">';
-
-				  /*	if ($pagination->total_pages() > 1) {
-						$last = $page - 2;
-						echo @"<li><a href=\"$_PHP_SELF?page=$last\">Previous</a></li>";
-					} else if ($page == 0) {
-						echo @"<li><a href=\"$_PHP_SELF?page=$page\"> <li>Next</a></li>";
-					} else if ($page > 0) {
-						$last = $page - 2;
-						echo @"<li><a href=\"$_PHP_SELF?page=$last\">Previous</a></li> ";
-						echo @"<li><a href=\"$_PHP_SELF?page=$page\">Next</a></li>";
-					}*/
-
-					if ($pagination->total_pages() > 1){
-
-						echo 'Page ' .$current_page .' of '. $pagination->total_pages();
-
-						if ($current_page == 1 ){
-							echo ' <li class="disabled"><a href=listofsubject.php?page='.$pagination->First_page().'>First </a> </li>';
-						
-						}else{
-							echo ' <li ><a href=listofsubject.php?page='.$pagination->First_page().'>First </a> </li>';
-
+				  	<tr><td colspan="7"><?php	
+				  		echo '<ul class="pager" align="center">';
+						if ($pagination->total_pages() > 1){
+							echo '<li class="pager-info"><span>Page ' .$current_page .' of '. $pagination->total_pages().'</span></li>';
+							if ($current_page == 1 ){
+								echo ' <li class="disabled"><a href="listofsubject.php?page='.$pagination->First_page().'">First</a></li>';
+							}else{
+								echo ' <li><a href="listofsubject.php?page='.$pagination->First_page().'">First</a></li>';
+							}
+							if ($current_page > 1 ){
+								echo ' <li><a href="listofsubject.php?page='.($current_page - 1).'">Previous</a></li>';
+							}else{
+								echo ' <li class="disabled"><a href="#">Previous</a></li>';
+							}
+							if ($current_page < $pagination->total_pages()){
+								echo ' <li><a href="listofsubject.php?page='.($current_page + 1) .'">Next</a></li>';
+							}else{
+								echo ' <li class="disabled"><a href="#">Next</a></li>';
+							}
+							if ($current_page == $pagination->total_pages() ){
+								echo ' <li class="disabled"><a href="listofsubject.php?page='.$pagination->total_pages().'">Last</a></li>';
+							}else{
+								echo ' <li><a href="listofsubject.php?page='.$pagination->total_pages().'">Last</a></li>';
+							}
 						}
-						
-						if  ($current_page >= 1 ){
-							
-							echo ' <li> <a href=listofsubject.php?page='.($current_page - 1).'>Previous </a> </li>';
-
-						}else{
-							echo ' <li class="disabled"> <a href=listofsubject.php?page='.($current_page - 1).'>Previous </a> </li>';
-						}
-						
-						if ($current_page <  $pagination->total_pages()){
-						
-							echo ' <li><a href=listofsubject.php?page='.($current_page + 1) .'>Next</a></li> ';
-											
-						}else{
-
-							echo ' <li class="disabled"><a href=listofsubject.php?page='.($current_page + 1) .'>Next</a></li> ';
-						}
-						
-					
-							
-						if ($current_page ==  $pagination->total_pages() ){
-													
-							echo ' <li class="disabled"><a href=listofsubject.php?page='.$pagination->total_pages().'>Last </a> </li>';
-						}else{
-							echo ' <li><a href=listofsubject.php?page='.$pagination->total_pages().'>Last </a> </li>';
-						}
-							
-					}
-					/*				
-					if ($pagination->total_pages() > 1){
-						//this is for previous record
-						if ($pagination->has_previous_page()){
-						echo ' <li><a href=listofsubject.php?page='.$pagination->previous_page().'>&laquo; </a> </li>';
-						}
-						 //it loops to all pages
-					 	 for($i = 1; $i <= $pagination->total_pages(); $i++){
-							//check if the value of i is set to current page	
-							if ($i == $pagination->current_page){
-							//then it sset the i to be active or focused
-								echo '<li class="active"><span>'. $i.' <span class="sr-only">(current)</span></span></li>';
-							 }else {
-							 //display the page number
-								echo ' <li><a href=listofsubject.php?page='.$i.'> '. $i .' </a></li>';
-							 } 
-						 }
-						//this is for next record		
-						if ($pagination->has_next_page()){
-						echo ' <li><a href=listofsubject.php?page='.$pagination->next_page().'>&raquo;</a></li> ';
-						}
-						
-					}*/
+						echo '</ul>';
 					?></td></tr>
 				  </tfoot>	
 				</table>
-				<div class="btn-group">
-				  <a href="newsubject.php" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> New</a>
-				  <button type="submit" class="btn btn-default" name="delete"><span class="glyphicon glyphicon-trash"></span> Delete Selected</button>
+				<div class="action-btn-group" style="margin-top: 16px; display: flex; gap: 10px;">
+				  <a href="newsubject.php" class="btn btn-primary"><i class="fas fa-plus-circle"></i> New</a>
+				  <button type="submit" class="btn btn-outline-danger" name="delete" onclick="return confirm('Are you sure you want to delete selected subject(s)?');"><i class="fas fa-trash-alt"></i> Delete Selected</button>
 				</div>
 				</form>
 	  	</div><!--End of well-->

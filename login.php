@@ -1,7 +1,7 @@
 <?php 
 	require_once("includes/initialize.php");
-	include("menu2.php");
 	include("header2.php");
+	include("menu.php");
 ?>
 
 <script>setActive("home");</script>
@@ -30,65 +30,65 @@
 			$val=$conn->query("select * from validity");
 			$row=$val->fetch_assoc();
 			
-			$msg="<small style='color:red'>SORRY! Your access validity was expired on <b>".$row['validity']."</b>. Please contact your System Administrator.</small></br>";
+			$msg="<small class='text-danger'>SORRY! Your access validity was expired on <b>".$row['validity']."</b>. Please contact your System Administrator.</small></br>";
 
 		}else
-			$msg="<small style='color:red'>ACCESS DENIED! Either email address or password is invalid.</small>";
+			$msg="<small class='text-danger'>ACCESS DENIED! Either email address or password is invalid.</small>";
 			$err=1;
 			{
 		}
 	}
 ?>
 
-<center>
-	<div>
-		<img class="media-object" src="img/logo.png" width="120px"  style="filter: drop-shadow(5px 5px 5px #bbb);">
+<div class="auth-container">
+	<div class="auth-header">
+		<img src="img/logo.png" class="auth-logo" alt="WPH Logo">
+		<h3 class="font-weight-bold brand-title" style="letter-spacing: -0.02em; margin-top: 10px; margin-bottom: 8px;">WEST PRIME HYBRID</h3>
+		<p class="text-muted" style="font-size: 14px; margin-bottom: 0;">Online Enrollment & Portal System</p>
 	</div>
-	<div class="text-primary"><h3 style="text-shadow: 0 3px 10px rgb(0 0 0 / 0.1)"><strong>ENROLLMENT SYSTEM</strong></h3></div>
 
-<!-- Login Form -->
-<div class="panel panel-primary" style="border-radius:5px;padding:0;width:320px;margin-top:20px;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">					
-	<div class="panel-heading" style="border:1px solid #3b71ca;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);"><span class="glyphicon glyphicon-user"></span> &nbsp; User Login</div>
-		<div class="panel-body" style="margin-bottom:-20px">	
-			<form  method="POST" action="">
-				<div class="col-xs-12 col-sm-12">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12">
-								<?php echo $msg; ?>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row" >
-							<div class="col-xs-12 col-sm-12">
-								<input type="email" placeholder="Email" class="form-control" name="uname" value="admin@westprime.com" required>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12">
-								<input type="password" placeholder="Password" class="form-control" name="pass" required>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12">
-								<input type="submit" class="form-control btn btn-primary" name="btnlogin" value="Sign In" style="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)">
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12">
-								<div>Not Registered? &nbsp; <a href="signup.php">Signup for Westprime</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
+	<!-- Login Form Card -->
+	<div class="enroll-card" style="box-shadow: var(--shadow-lg)">
+		<div class="text-center">
+			<h4 class="font-weight-bold card-login-title auth-card-title"><i class="fas fa-lock text-primary mr-1"></i> Sign In to Account</h4>
+			<small class="text-muted auth-card-subtitle">Enter your account credentials to continue</small>
 		</div>
-	<!--End Login Form-->
+
+		<?php if (!empty($msg)): ?>
+			<div class="alert alert-danger text-center small" style="border-radius: 10px; padding: 14px; margin-bottom: 24px; line-height: 1.5;">
+				<?php echo $msg; ?>
+			</div>
+		<?php endif; ?>
+
+		<form method="POST" action="">
+			<div class="enroll-form-group">
+				<label for="uname"><i class="fas fa-envelope text-primary"></i> Email Address</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fas fa-at"></i></span>
+					<input type="email" id="uname" placeholder="name@westprime.com" class="form-control" name="uname" value="admin@westprime.com" required>
+				</div>
+			</div>
+
+			<div class="enroll-form-group">
+				<label for="pass"><i class="fas fa-key text-primary"></i> Password</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fas fa-lock"></i></span>
+					<input type="password" id="pass" placeholder="••••••••" class="form-control" name="pass" required>
+				</div>
+			</div>
+
+			<div>
+				<button type="submit" class="btn btn-primary btn-block" name="btnlogin" style="font-size: 15.5px !important;">
+					<i class="fas fa-sign-in-alt mr-1"></i> Sign In
+				</button>
+			</div><br>
+
+			<div class="text-center">
+				<span class="text-muted small">Not registered yet?</span>
+				<a href="signup.php" class="font-weight-bold text-primary ml-1" style="font-size: 13.5px;">Create Student Account</a>
+			</div>
+		</form>
+	</div>
+</div>
+
 <?php include("footer.php") ?>

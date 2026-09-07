@@ -2,15 +2,7 @@
 	require_once("includes/initialize.php");
 	include 'header.php';
 
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} 	
-	else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} 
-	else{
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 
 <script>setActive("entry");</script>
@@ -40,23 +32,17 @@ if (isset($_POST['search'])){
 					  <div class="panel-body">
 
 					    <div class="form-group" id="subjcode">
-				            <div class="col-md-10">
-				              <label class="col-md-4 control-label" for=
-				              "subjcode">Subject Code:</label>
-
+				            <div class="col-md-12">
+				              <label class="col-md-4 control-label" for="subjcode">Subject Code:</label>
 				              <div class="col-md-8">
-				                 <input class="form-control input-sm" id="subjcode" name="subjcode" placeholder=
-													  "Subject Code" type="text" value="">
+				                 <input class="form-control input-sm" id="subjcode" name="subjcode" placeholder="Subject Code" type="text" value="">
 				              </div>
-
 				            </div>
-
 				          </div>
-				          <div class="form-group" id="course">
-				            <div class="col-md-10">
-				             <label class="col-md-4 control-label" for=
-				                "course">Course:</label>
 
+				          <div class="form-group" id="course">
+				            <div class="col-md-12">
+				             <label class="col-md-4 control-label" for="course">Course:</label>
 				                <div class="col-md-8">
 				                 <select class="form-control input-sm" name="course" id="course">
 				                  	<?php
@@ -65,57 +51,40 @@ if (isset($_POST['search'])){
 				                  	foreach ($cur as $course) {
 				                  		echo '<option value="'. $course->COURSE_ID.'">'.$course->COURSE_NAME .'</option>';
 				                  	}
-
 				                  	?>
-										
 									</select>	
 				                </div>
-
 				            </div>
-
 				          </div>
+
 				          <div class="form-group" id="ay">
-				            <div class="col-md-10">
-				               <label class="col-md-4 control-label" for=
-				                "ay">AY:</label>
-
+				            <div class="col-md-12">
+				               <label class="col-md-4 control-label" for="ay">AY:</label>
 				                <div class="col-md-8">
-				                  <input class="form-control input-sm" id="ay" name="ay" type=
-				                  "text" placeholder="Academic Year">
+				                  <input class="form-control input-sm" id="ay" name="ay" type="text" placeholder="Academic Year">
 				                </div>
-
 				            </div>
-
 				          </div>
+
 				           <div class="form-group" id="semester">
-				            <div class="col-md-10">
-				               <label class="col-md-4 control-label" for=
-				                "semester">Semester:</label>
-
+				            <div class="col-md-12">
+				               <label class="col-md-4 control-label" for="semester">Semester:</label>
 				                <div class="col-md-8">
-				                  <input class="form-control input-sm" id="semester" name="semester" type=
-				                  "text" placeholder="Semester">
+				                  <input class="form-control input-sm" id="semester" name="semester" type="text" placeholder="Semester">
 				                </div>
-
 				            </div>
-
 				          </div>
 
-						<div class="form-group" id="subjcode">
-				            <div class="col-md-10">
-				               <label class="col-md-4 control-label"></label>
-
-				                <div class="col-md-8">
-							         <div class="btn-group">
-									    <button type="submit" name="search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
-									    <button type="Reset" name="search" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-									    <a href="newsubject.php" name="add" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add</a>
-									  						  
+						<div class="form-group">
+				            <div class="col-md-12">
+				                <div class="col-md-8 col-md-offset-4">
+							         <div class="filter-query-actions">
+									    <button type="submit" name="search" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+									    <button type="reset" class="btn btn-outline-secondary"><i class="fas fa-undo"></i> Reset</button>
+									    <a href="newsubject.php" name="add" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add</a>
 									</div>
 				                </div>
-
 				            </div>
-
 				          </div>
 
 					  </div>

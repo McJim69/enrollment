@@ -1,7 +1,7 @@
 <?php
 	require_once("includes/initialize.php");
 	include 'header.php';  
-	include("menu_student.php");
+	include("menu.php");
 	
     function fill_type($pdo){
 	$output= '';

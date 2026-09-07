@@ -2,13 +2,7 @@
 	require_once("includes/initialize.php");
 	include 'header.php';
 	
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} else {
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 <div class="container">
 			

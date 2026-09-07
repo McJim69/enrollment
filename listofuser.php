@@ -2,15 +2,7 @@
 	require_once("includes/initialize.php");
 	include 'header.php';
 
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} 	
-	else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} 
-	else{
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 
 <script>setActive("settings");</script>
@@ -45,11 +37,11 @@
 				  	<tr><td></td><td></td><td></td></tr>
 				</tfoot>	
 				</table>
-				<div class="btn-group">
-				  <a href="newuser.php" class="btn btn-default">Create New User</a>
+				<div class="action-btn-group" style="margin-top: 16px; display: flex; gap: 10px;">
+				  <a href="newuser.php" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create New User</a>
 					<?php if($_SESSION['ACCOUNT_TYPE']=="Administrator"){
 					echo"
-						<button type='submit' class='btn btn-default' name='delete'><span class='glyphicon glyphicon-trash'></span> Delete Selected</button>
+						<button type='submit' class='btn btn-outline-danger' name='delete' onclick=\"return confirm('Are you sure you want to delete selected user(s)?');\"><i class='fas fa-trash-alt'></i> Delete Selected</button>
 						";
 						}
 					?>

@@ -2,7 +2,7 @@
 	session_start();
 	require_once("connect.php");
 	include 'header.php';
-	include("menu_student.php");
+	include("menu.php");
 	require_once("language.php");
 	
 	$ses = $_SESSION['ACCOUNT_USERNAME'];
@@ -25,7 +25,7 @@
 	<div class="well">
 		<div class="row text-center" align="center">
 			<div class="col col-md-2">
-				<img src="img/logo.png" style="width:150px;height:150px">
+				<img src="img/logo.png" class="header-logo-img" style="aspect-ratio: 2/2; width: 120px; height: 120px; object-fit: contain;">
 			</div>
 			<div class="col col-md-8">
 				<h3><?php echo TITLE;?></h3>
@@ -36,7 +36,7 @@
 				<?php echo EMAIL;?>
 			</div>
 			<div class="col col-md-2">	
-				<img src="img/blank.jpg" style="width:150px;height:150px">
+				<img src="img/blank.jpg" class="header-photo-img" style="aspect-ratio: 2/2; width: 120px; height: 120px; object-fit: cover; border: 1px solid #ccc; border-radius: 4px;">
 			</div>
 		</div>
 		<div class="text-center"><h3>ENROLLMENT FOR COLLEGE</h3></div>
@@ -107,7 +107,7 @@
 						<div class='form-control mar-top'>Class Block: <b>";
 							if($rss['CLASS_BLOCK']==""){echo"Not Yet Scheduled";} else {echo"".$rss['CLASS_BLOCK']."";}echo"</b>
 						</div>							
-						<div class='form-control mar-top'>Current Date: <b>".date("F d, Y")."</b></div>					
+						<div class='form-control mar-top'>Date: <b>".date("F d, Y")."</b></div>					
 					</div>
 				</div>
 				<div class='mar-top'><h4>Personal Information</h4></div>
@@ -159,8 +159,8 @@
 					</div>
 				</div>
 				<div class='row' style='padding:15px;text-align:center'>
-					<table class='table'>
-						<thead class='std' style='background:#bbb'>
+					<table class='table enroll-table'>
+						<thead class='std'>
 							<tr class='std text-center'>
 								<th class='std text-center'>Level</th>
 								<th class='std text-center'>Name of School</th>
@@ -168,7 +168,7 @@
 								<th class='std text-center'>Honors Received</th>
 							</tr>
 						</thead>
-						<tbody style='background:#fff'>
+						<tbody>
 							<tr>
 								<td class='std'>Elementary</td>
 								<td class='std'>".$rss['ELS_SCHOOL']."</td>
@@ -226,31 +226,28 @@
 						<div class='form-control mar-top'>Relationship to the Student: <b>".$det['GD_RELATED']."</b></div>
 					</div>
 				</div>
-				<div class='row text-center'>
-					<div id='buttons1' class='col col-md-4'>
-						<div>&nbsp;</div>
-						<div class='row text-center'>
-							<button class='btn btn-primary' onclick=\"jump('studentLoad.php?id=$rss[0]')\" style='width:100px'>Class Load</button> &nbsp; &nbsp; 
-							<button class='btn btn-primary' onclick=\"jump('studentEval.php?id=$rss[0]')\" style='width:100px'>Evaluation</button>
+				<div class='row' style='margin-top:20px;align-items:flex-end;'>
+					<div id='buttons1' class='col col-md-5 no-print' style='margin-top:15px;'>
+						<div class='action-btn-grid' style='display:flex;flex-direction:column;gap:10px;'>
+							<div style='display:flex;gap:10px;'>
+								<button class='btn btn-primary' onclick=\"jump('studentsubjects.php?studentId=$rss[0]')\" style='flex:1;'><i class='fas fa-book-open'></i> Class Load</button>
+								<button class='btn btn-primary' onclick=\"jump('Student_advicesubject.php?studentId=$rss[0]')\" style='flex:1;'><i class='fas fa-clipboard-check'></i> Evaluation</button>
+							</div>
+							<div style='display:flex;gap:10px;'>
+								<button class='btn btn-primary' onclick='window.print()' style='flex:1;'><i class='fas fa-print'></i> Print Form</button>
+								<button class='btn btn-primary' onclick=\"jump('studentEdit.php?id=$rss[0]')\" style='flex:1;'><i class='fas fa-edit'></i> Edit</button>
+							</div>
 						</div>
 					</div>
-					<div class='col col-md-4' style='background:#fff;border:1px solid #bbb;border-radius:5px;padding:10px;margin:20px 0 0 0'>
+					<div class='col col-md-6 user-info-box' style='margin-left:5px;border:1px solid var(--border-color);border-radius:8px;padding:12px;margin-top:15px;'>
 						<div><b>".PTITLE."</b></div>
-						<div><small>".PLEDGE."</small></div>
-						<div style='margin:20px 20px 0 20px;border-bottom:1px solid #bbb;text-transform:uppercase'>
+						<div style='margin-top:4px;'><small>".PLEDGE."</small></div>
+						<div class='student-sig-name' style='margin:20px 8px 0 8px;padding:0 2px;border-bottom:1px solid var(--border-color);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;text-align:center;'>
 							<b>".$rss['FNAME']." ".$rss['MNAME']." ".$rss['LNAME']."</b>
 						</div>
-						<div><small><i>".SIGOPN."</i></small></div>
+						<div style='text-align:center;'><small><i>".SIGOPN."</i></small></div>
 					</div>
-					<div id='buttons2' class='col col-md-4'>
-						<div>&nbsp;</div>
-						<div class='row text-center'>
-							<button class='btn btn-primary' onclick='printF()' style='width:100px'>Print</button> &nbsp; &nbsp; 
-							<button class='btn btn-primary' onclick=\"jump('studentEdit.php?id=$rss[0]')\"  style='width:100px'>Edit</button>
-						</div>
-					</div>
-				</div>
-			  ";
+				</div>";
 			}
 		?>
 	</div>
@@ -258,16 +255,7 @@
 
 <script>
 	function printF(){		
-		getID('menu').style.display='none';
-		getID('footer').style.display='none';
-		getID('buttons1').style.display='none';
-		getID('buttons2').style.display='none';
-
-	window.print();
-		getID('menu').style.display='block';
-		getID('footer').style.display='block';
-		getID('buttons1').style.display='block';
-		getID('buttons2').style.display='block';
+		window.print();
 	}
 </script>
 

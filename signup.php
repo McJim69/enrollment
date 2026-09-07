@@ -1,7 +1,7 @@
 <?php
 	require_once("includes/initialize.php");
 	include 'header2.php';
-	include("menu1.php");
+	include("menu.php");
 ?>
 
 <script>setActive("signup");</script>
@@ -45,83 +45,51 @@ if (isset($_POST['save'])){
 	}
 }
 ?>			
-			  <form class="form-horizontal well span6" action="signup.php" method="POST">
+<div class="auth-container" style="max-width: 540px;">
+	<div class="auth-header">
+		<img src="img/logo.png" class="auth-logo" alt="WPH Logo">
+		<h3 class="font-weight-bold brand-title" style="letter-spacing: -0.02em; margin-top: 10px; margin-bottom: 8px;">Register Account</h3>
+		<p class="text-muted" style="font-size: 14px; margin-bottom: 0;">Join West Prime Hybrid Online Enrollment System</p>
+	</div>
 
-					<fieldset>
-						<legend>Register User Account</legend>
-				          
-				          <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-4 control-label" for="name">Full Name:</label>
+	<div class="enroll-card" style="box-shadow: var(--shadow-lg); padding: 40px 36px;">
+		<form action="signup.php" method="POST">
+			<div class="enroll-form-group">
+				<label for="name"><i class="fas fa-user text-primary"></i> Full Name</label>
+				<input class="form-control" id="name" name="name" placeholder="John Doe" type="text" required>
+			</div>
 
-				              <div class="col-md-8">
-				              	<input name="deptid" type="hidden" value="">
-				                 <input class="form-control input-sm" id="name" name="name" placeholder="Account Name" type="text" value="">
-				              </div>
-				            </div>
-				          </div>
+			<div class="enroll-form-group">
+				<label for="username"><i class="fas fa-envelope text-primary"></i> Email Address</label>
+				<input class="form-control" id="username" name="username" placeholder="john.doe@example.com" type="email" required>
+			</div>
 
-				          <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-4 control-label" for="username">Email Address:</label>
+			<div class="enroll-form-group">
+				<label for="pass"><i class="fas fa-lock text-primary"></i> Password</label>
+				<input class="form-control" id="pass" name="pass" placeholder="Account Password" type="password" required>
+			</div>
 
-				              <div class="col-md-8">
-				              	<input name="deptid" type="hidden" value="">
-				                 <input class="form-control input-sm" id="username" name="username" placeholder="Email Address" type="email" value="">
-				              </div>
-				            </div>
-				          </div>
+			<div class="enroll-form-group">
+				<label for="type"><i class="fas fa-user-tag text-primary"></i> Account Type</label>
+				<select class="form-control" name="type" id="type">
+					<option value="Student">Student Account</option>
+				</select>
+			</div>
 
-				          <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-4 control-label" for="pass">Password:</label>
+			<div style="margin-top: 32px; margin-bottom: 12px;">
+				<button class="btn btn-primary btn-block" name="save" type="submit" style="font-size: 15.5px !important;">
+					<i class="fas fa-user-check mr-1"></i> Register Account
+				</button>
+			</div>
 
-				              <div class="col-md-8">
-				              	<input name="deptid" type="hidden" value="">
-				                 <input class="form-control input-sm" id="pass" name="pass" placeholder="Account Password" type="Password" value="">
-				              </div>
-				            </div>
-				          </div>
-						  
-				          <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-4 control-label" for="type">Account Type:</label>
-				              <div class="col-md-8">
-				               <select class="form-control input-sm" name="type" id="type">
-				                	<option value="Student">Student</option>
-				                </select>	
-				              </div>
-				            </div>
-				          </div>
-						
-						 <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-4 control-label" for="idno"></label>
-				              <div class="col-md-8">
-				                <button class="btn btn-primary" name="save" type="submit">Submit</button>
-				              </div>
-				            </div>
-				          </div>
+			<div class="text-center form-divider">
+				<span class="text-muted small">Already have an account?</span>
+				<a href="login.php" class="font-weight-bold text-primary ml-1" style="font-size: 13.5px;">Sign In Here</a>
+			</div>
+		</form>
+	</div>
+</div>
 
-							
-					</fieldset>	
-
-				<div class="form-group">
-		            <div class="rows">
-		              <div class="col-md-6">
-		                <label class="col-md-6 control-label" for="otherperson"></label>
-		                <div class="col-md-6">		             
-		                </div>
-		              </div>
-		              <div class="col-md-6" align="right">
-		               </div>
-		          </div>
-		          </div>
-					
-				</form>
-			
-			</div><!--End of container-->
-			
 <?php include("footer.php") ?>
 
 

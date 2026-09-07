@@ -2,15 +2,7 @@
 	require_once("includes/initialize.php");	
 	include 'header.php';
 
-	if($_SESSION['ACCOUNT_TYPE']=="Registrar"){
-		include("menu_registrar.php");
-	} 	
-	else if($_SESSION['ACCOUNT_TYPE']=="Encoder"){
-		include("menu_encoder.php");
-	} 
-	else{
-		include("menu.php");
-	}
+	include("menu.php");
 ?>
 
 <script>setActive("enroll");</script>
@@ -54,42 +46,7 @@
 		}
 	?>
 	
-<nav class="navbar navbar-default" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#"> Student ID Number:</a>
-  </div>
-
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  
-    <form class="navbar-form navbar-left" action="newenrollment.php" method="POST">
-      <div class="form-group">
-        <input type="text" name="txtsearch" class="form-control" placeholder="Search">
-      </div>
-      <button type="submit" name="search"class="btn btn-default">  <span class="glyphicon glyphicon-search"></span></button>
-    </form>
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-	  <a href="#">
-		<?php 
-			$created =  strftime("%Y-%m-%d %H:%M:%S", time()); 
-			echo date_toText($created); 
-		?>
-	</a>
-	</li>
-      <li class="dropdown">
-       
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
-</nav>
+	<?php include("manager.php"); ?>
 
 		  <form class="form-horizontal span4" action="#.php" method="POST">
 
@@ -100,50 +57,36 @@
 					  <div class="panel-body">
 
 					   <div class="row">
-			            <div class="col-6 col-sm-6 col-lg-6">
-			             <div class="form-group" id="idno">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for=
-				              "Semester">ID Number: </label>
-				              <div class="col-md-6">
-				                <input class="form-control input-sm" id="idno" name="idno" readonly placeholder=
-									  "ID Number" type="text" value="<?php echo (isset($cur)) ? $cur->IDNO : 'ID' ;?>">
-								</div>	  
-				         			                       	
-				            </div>
-				          </div>
-				          <div class="form-group" id="idno">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for=
-				              "Semester">Name: </label>
-				              <div class="col-md-6">
-				                <input class="form-control input-sm" readonly placeholder=
-									  "ID Number" type="text" value="<?php echo (isset($cur)) ? $cur->LNAME.', '.$cur->FNAME : 'Fullname' ;?>">
-								</div>	  
-				         			                       	
-				            </div>
-				          </div>
-				      
-			          
-			              <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for=
-				              "Status">Status : </label>
+			            <div class="col-md-10 col-md-offset-1">
 
-				              <div class="col-md-6">
+			             <div class="form-group" id="idno">
+				            <label class="col-md-3 control-label" for="idno">ID Number:</label>
+				            <div class="col-md-9">
+				                <input class="form-control input-sm" id="idno" name="idno" readonly placeholder="ID Number" type="text" value="<?php echo (isset($cur)) ? $cur->IDNO : 'ID' ;?>">
+							</div>
+				          </div>
+
+				          <div class="form-group">
+				            <label class="col-md-3 control-label" for="Name">Name:</label>
+				            <div class="col-md-9">
+				                <input class="form-control input-sm" readonly placeholder="Fullname" type="text" value="<?php echo (isset($cur)) ? $cur->LNAME.', '.$cur->FNAME : 'Fullname' ;?>">
+							</div>
+				          </div>
+
+			              <div class="form-group">
+				            <label class="col-md-3 control-label" for="Status">Status:</label>
+				            <div class="col-md-9">
 				                 <select class="form-control input-sm" name="Status" id="Status">
 									<option value="New">New Student</option>
 									<option value="Continuing">Continuing</option>	
 									<option value="Trasferee">Trasferee</option>	
 								</select>
-				              </div>
 				            </div>
 				          </div>
-			             <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for="course">Course and Year :</label>
 
-				              <div class="col-md-6">
+			             <div class="form-group">
+				            <label class="col-md-3 control-label" for="course">Course and Year:</label>
+				            <div class="col-md-9">
 				               <select class="form-control input-sm" name="course" id="course">
 				                  	<?php
 				                  	$course = new Course();
@@ -151,20 +94,14 @@
 				                  	foreach ($cur as $course) {
 				                  		echo '<option value="'. $course->COURSE_ID.'">'.$course->COURSE_NAME.' '.$course->COURSE_LEVEL .' '.$course->COURSE_MAJOR .'</option>';
 				                  	}
-
 				                  	?>
-										
-									</select>	
-				              </div>
+								</select>	
 				            </div>
 				          </div>
-			             
-			             <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for=
-				              "ay">Academic Year :</label>
 
-				              <div class="col-md-6">
+			             <div class="form-group">
+				            <label class="col-md-3 control-label" for="ay">Academic Year:</label>
+				            <div class="col-md-9">
 				                <select class="form-control input-sm" name="ay" id="ay">
 									<?php 
 										$year1 = date("Y");
@@ -175,50 +112,31 @@
 										}
 									?>
 								</select>	
-				              </div>
 				            </div>
 				          </div>
 
 				          <div class="form-group">
-				            <div class="col-md-8">
-				              <label class="col-md-6 control-label" for="Semester">Semester : </label>
-
-				              <div class="col-md-6">
+				            <label class="col-md-3 control-label" for="Semester">Semester:</label>
+				            <div class="col-md-9">
 				                 <select class="form-control input-sm" name="Semester" id="Semester">
 									<option value="First">First</option>
 									<option value="Second">Second</option>	
 									<option value="Summer">Summer</option>	
 								</select>
-				              </div>
 				            </div>
 				          </div>
-				          <div class="form-group" id="idno">
-				            <div class="col-md-10">
-				               <label class="col-md-4 control-label"></label>
 
-				                <div class="col-md-8">
-							         <div class="btn-group">
-									    <button type="submit" name="savestep1" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-									    <a href="newstudent.php" name="add" class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span> New Student</a>
-									  
-									  
+				          <div class="form-group">
+				            <div class="col-md-9 col-md-offset-3">
+							         <div class="filter-query-actions" style="display: flex; gap: 10px; max-width: 360px;">
+									    <button type="submit" name="savestep1" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+									    <a href="newstudent.php" name="add" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i> New Student</a>
 									</div>
-				                </div>
-
 				            </div>
-
 				          </div>
 				       
-				          
 			            </div><!--/span-->
-						
-						<!--
-			            <div class="col-6 col-sm-6 col-lg-6">
-			            	<h3>Step No.5</h3><p>After this step, student proceed to <b>step-6</b> for advising of subject(s).</p>
-			            </div>	
-						-->
-						
-			        </div><!--End or row-->
+			        </div><!--End of row-->
 
 					  </div>
 					</div>

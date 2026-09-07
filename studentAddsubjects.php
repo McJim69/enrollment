@@ -1,7 +1,7 @@
 <?php
 	require_once("includes/initialize.php");
 	include 'header.php';
-	include("menu_student.php");
+	include("menu.php");
 ?>
 
 <script>setActive("subject");</script>

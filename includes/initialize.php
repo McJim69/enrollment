@@ -13,9 +13,9 @@
 //(\ for windows, / for Unix)
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
-defined('SITE_ROOT') ? null : define ('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'].DS.'projects/enrollment');
+defined('LIB_PATH') ? null : define('LIB_PATH', __DIR__);
 
-defined('LIB_PATH') ? null : define ('LIB_PATH',SITE_ROOT.DS.'includes');
+defined('SITE_ROOT') ? null : define('SITE_ROOT', dirname(__DIR__));
 
 // load config file first 
 require_once(LIB_PATH.DS."config.php");
